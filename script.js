@@ -1,66 +1,44 @@
 lucide.createIcons();
 
-const title = document.getElementById("title");
-const backBtn = document.getElementById("back-btn");
+const backBtn = document.getElementById('back-btn');
+const screenTitle = document.getElementById('screen-title');
 
-let historyStack = [];
+function navigate(pageId, title) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    
+    // Show selected page
+    document.getElementById('page-' + pageId).classList.add('active');
+    
+    // Update Title
+    screenTitle.innerText = title;
 
-/* DATA */
-const vehicles = [
-    { id: "V1", name: "Volvo FH16", fuel: "65%", speed: "60 km/h", status: "Moving" },
-    { id: "V2", name: "Scania R500", fuel: "80%", speed: "0 km/h", status: "Idle" }
-];
-
-/* INIT */
-const list = document.getElementById("vehicle-list");
-
-vehicles.forEach(v => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `<span>${v.name}</span><span>${v.status}</span>`;
-    div.onclick = () => openDetail(v.id);
-    list.appendChild(div);
-});
-
-/* NAVIGATION */
-function navigate(page, text) {
-    const current = document.querySelector(".page.active");
-    if (current) historyStack.push(current.id);
-
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("page-" + page).classList.add("active");
-
-    title.innerText = text;
-
-    document.querySelectorAll(".nav-item").forEach(n => {
-        n.classList.remove("active");
-        if (n.dataset.page === page) n.classList.add("active");
+    // Update Nav UI
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+        if(item.innerText.toLowerCase().includes(title.toLowerCase().substring(0,3))) {
+            item.classList.add('active');
+        }
     });
 
-    backBtn.classList.toggle("hidden", historyStack.length === 0);
-
-    lucide.createIcons();
+    // Toggle Back Button
+    if (pageId.includes('detail')) {
+        backBtn.classList.remove('hidden');
+    } else {
+        backBtn.classList.add('hidden');
+    }
 }
 
-/* DETAIL */
-function openDetail(id) {
-    const v = vehicles.find(x => x.id === id);
-
-    document.getElementById("v-name").innerText = v.name;
-    document.getElementById("v-fuel").innerText = v.fuel;
-    document.getElementById("v-speed").innerText = v.speed;
-    document.getElementById("v-status").innerText = v.status;
-
-    navigate("detail", "Vehicle Details");
+function openVehicleDetail(id) {
+    document.getElementById('detail-v-name').innerText = "Vehicle " + id;
+    navigate('vehicle-detail', 'Vehicle Details');
 }
 
-/* BACK */
+function openTripDetail(id) {
+    // You can expand this to a specific Trip Detail page similarly
+    navigate('vehicle-detail', 'Trip Logs'); 
+}
+
 function goBack() {
-    const prev = historyStack.pop();
-    if (!prev) return;
-
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById(prev).classList.add("active");
-
-    backBtn.classList.toggle("hidden", historyStack.length === 0);
+    navigate('dashboard', 'Dashboard');
 }
