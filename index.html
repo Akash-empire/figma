@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetPro Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="app-header">
+            <h1 id="screen-title">Live Tracking</h1>
+            <i data-lucide="bell" class="icon"></i>
+        </header>
+
+        <main id="main-content">
+            <section id="tracking-screen" class="screen active">
+                <div class="map-placeholder">
+                    <div class="vehicle-marker">
+                        <i data-lucide="truck"></i>
+                    </div>
+                    <div class="map-controls">
+                        <button class="btn-round"><i data-lucide="plus"></i></button>
+                        <button class="btn-round"><i data-lucide="minus"></i></button>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <div class="card-info">
+                        <h3>Truck #402 - Volvo FH</h3>
+                        <p>Status: <span class="status moving">Moving (65 km/h)</span></p>
+                    </div>
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </section>
+
+            <section id="monitoring-screen" class="screen">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <i data-lucide="fuel" class="icon-fuel"></i>
+                        <h3>Fuel Level</h3>
+                        <p class="stat-val">78%</p>
+                        <div class="progress-bar"><div class="fill" style="width: 78%"></div></div>
+                    </div>
+                    <div class="stat-card">
+                        <i data-lucide="gauge" class="icon-tyre"></i>
+                        <h3>Tyre PSI</h3>
+                        <p class="stat-val">32 <small>Avg</small></p>
+                        <span class="badge warning">Check Rear Left</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="management-screen" class="screen">
+                <h3>Active Drivers</h3>
+                <div class="list-item">
+                    <div class="avatar">JD</div>
+                    <div class="details">
+                        <h4>John Doe</h4>
+                        <p>Trip: DXB to AUH</p>
+                    </div>
+                    <span class="badge online">Active</span>
+                </div>
+                <h3>Recent Trips</h3>
+                <div class="list-item">
+                    <i data-lucide="map-pin"></i>
+                    <div class="details">
+                        <h4>Trip #992</h4>
+                        <p>Completed • 120km</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="showScreen('tracking', 'Live Tracking')">
+                <i data-lucide="map"></i>
+                <span>Map</span>
+            </button>
+            <button class="nav-item" onclick="showScreen('monitoring', 'Monitoring')">
+                <i data-lucide="activity"></i>
+                <span>Status</span>
+            </button>
+            <button class="nav-item" onclick="showScreen('management', 'Management')">
+                <i data-lucide="users"></i>
+                <span>Fleet</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
