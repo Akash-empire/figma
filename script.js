@@ -1,44 +1,31 @@
 lucide.createIcons();
 
-const backBtn = document.getElementById('back-btn');
-const screenTitle = document.getElementById('screen-title');
-
 function navigate(pageId, title) {
     // Hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     
-    // Show selected page
-    document.getElementById('page-' + pageId).classList.add('active');
+    // Show selected
+    const targetPage = document.getElementById('page-' + pageId);
+    targetPage.classList.add('active');
     
-    // Update Title
-    screenTitle.innerText = title;
-
-    // Update Nav UI
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-        if(item.innerText.toLowerCase().includes(title.toLowerCase().substring(0,3))) {
-            item.classList.add('active');
-        }
-    });
-
-    // Toggle Back Button
-    if (pageId.includes('detail')) {
-        backBtn.classList.remove('hidden');
+    // Update Header
+    document.getElementById('screen-title').innerText = title;
+    
+    // Toggle Search Bar visibility (hide on detail/profile pages)
+    const searchBar = document.getElementById('search-bar');
+    if(pageId === 'vehicle-detail' || pageId === 'profile') {
+        searchBar.style.display = 'none';
+        document.getElementById('back-btn').classList.remove('hidden');
     } else {
-        backBtn.classList.add('hidden');
+        searchBar.style.display = 'flex';
+        document.getElementById('back-btn').classList.add('hidden');
     }
+
+    // Update Nav Icons
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    // (Logic to match icon to pageId would go here)
 }
 
-function openVehicleDetail(id) {
-    document.getElementById('detail-v-name').innerText = "Vehicle " + id;
-    navigate('vehicle-detail', 'Vehicle Details');
-}
-
-function openTripDetail(id) {
-    // You can expand this to a specific Trip Detail page similarly
-    navigate('vehicle-detail', 'Trip Logs'); 
-}
-
-function goBack() {
-    navigate('dashboard', 'Dashboard');
+function openVehicleDetail(name) {
+    navigate('vehicle-detail', name);
 }
