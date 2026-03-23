@@ -1,31 +1,25 @@
 lucide.createIcons();
 
-function navigate(pageId, title) {
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    
-    // Show selected
-    const targetPage = document.getElementById('page-' + pageId);
-    targetPage.classList.add('active');
-    
-    // Update Header
-    document.getElementById('screen-title').innerText = title;
-    
-    // Toggle Search Bar visibility (hide on detail/profile pages)
-    const searchBar = document.getElementById('search-bar');
-    if(pageId === 'vehicle-detail' || pageId === 'profile') {
-        searchBar.style.display = 'none';
-        document.getElementById('back-btn').classList.remove('hidden');
-    } else {
-        searchBar.style.display = 'flex';
-        document.getElementById('back-btn').classList.add('hidden');
-    }
+function switchPage(pageId, title, element) {
+    // 1. Hide all pages
+    document.querySelectorAll('.app-page').forEach(page => {
+        page.classList.remove('active');
+    });
 
-    // Update Nav Icons
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    // (Logic to match icon to pageId would go here)
+    // 2. Show target page
+    document.getElementById('page-' + pageId).classList.add('active');
+
+    // 3. Update Header
+    document.getElementById('header-title').innerText = title;
+
+    // 4. Update Nav Buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    element.classList.add('active');
 }
 
-function openVehicleDetail(name) {
-    navigate('vehicle-detail', name);
+function showDetails(name) {
+    alert("Opening details for: " + name);
+    // In Figma, this would navigate to the Detailed Vehicle View
 }

@@ -2,130 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FleetPro Max</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FleetPro Mobile</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-<div class="app-container">
-    <header class="app-header">
-        <div class="top-bar">
-            <button id="back-btn" class="hidden" onclick="navigate('dashboard', 'Dashboard')"><i data-lucide="chevron-left"></i></button>
-            <h1 id="screen-title">Dashboard</h1>
-            <img src="https://ui-avatars.com/api/?name=Admin&background=6366f1&color=fff" class="avatar-sm" onclick="navigate('profile', 'My Profile')">
+<div class="mobile-frame">
+    <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+            <i data-lucide="signal" size="14"></i>
+            <i data-lucide="wifi" size="14"></i>
+            <i data-lucide="battery" size="14"></i>
         </div>
-        <div class="search-container" id="search-bar">
-            <i data-lucide="search"></i>
-            <input type="text" placeholder="Search vehicles, trips, or drivers...">
+    </div>
+
+    <header class="main-header">
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Alex+Fleet&background=6366f1&color=fff" alt="Profile">
+            <div>
+                <p class="greeting">Welcome back,</p>
+                <h2 id="header-title">Dashboard</h2>
+            </div>
         </div>
+        <button class="icon-btn"><i data-lucide="bell"></i><span class="notification-dot"></span></button>
     </header>
 
-    <main id="content-area">
-        <section id="page-dashboard" class="page active">
-            <div class="section-label">Fleet Status</div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="label">Total Distance</span>
-                    <div class="val">12,480 <small>km</small></div>
-                    <span class="trend up">+12% vs last month</span>
+    <main class="content-scroll">
+        <section id="page-dashboard" class="app-page active">
+            <div class="summary-grid">
+                <div class="sum-card blue">
+                    <i data-lucide="truck"></i>
+                    <h3>24</h3>
+                    <p>Total Fleet</p>
                 </div>
-                <div class="stat-card">
-                    <span class="label">Avg Fuel Consumption</span>
-                    <div class="val">8.2 <small>L/100km</small></div>
-                    <span class="trend down">-2% Efficiency</span>
+                <div class="sum-card green">
+                    <i data-lucide="check-circle"></i>
+                    <h3>18</h3>
+                    <p>On Road</p>
+                </div>
+                <div class="sum-card orange">
+                    <i data-lucide="alert-circle"></i>
+                    <h3>3</h3>
+                    <p>Alerts</p>
+                </div>
+                <div class="sum-card purple">
+                    <i data-lucide="clock"></i>
+                    <h3>3</h3>
+                    <p>Idle</p>
                 </div>
             </div>
 
-            <div class="section-label">Active Monitoring</div>
-            <div class="monitoring-scroll">
-                <div class="m-item"><i data-lucide="fuel"></i><span>Fuel: 88%</span></div>
-                <div class="m-item"><i data-lucide="gauge"></i><span>Tyre: 32PSI</span></div>
-                <div class="m-item"><i data-lucide="thermometer"></i><span>Temp: 90°C</span></div>
-            </div>
-
-            <div class="section-label">Recent Activity</div>
-            <div class="activity-feed">
-                <div class="feed-item"><div class="dot green"></div><span>Vehicle #402 started trip to Airport</span></div>
-                <div class="feed-item"><div class="dot red"></div><span>Fuel theft alert: Vehicle #109</span></div>
+            <div class="section-title"><h3>Active Tracking</h3><a href="#">View Map</a></div>
+            <div class="map-card-preview">
+                <div class="marker-info">
+                    <p><strong>Truck #402</strong> • Moving</p>
+                    <small>Sheikh Zayed Rd, Dubai</small>
+                </div>
             </div>
         </section>
 
-        <section id="page-vehicles" class="page">
-            <div class="filter-chips">
-                <span class="chip active">All</span>
-                <span class="chip">Moving</span>
-                <span class="chip">Idle</span>
-                <span class="chip">Maintenance</span>
+        <section id="page-vehicles" class="app-page">
+            <div class="search-bar">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search by plate or driver...">
             </div>
-            <div class="v-list">
-                <div class="v-card" onclick="openVehicleDetail('Volvo FH16')">
-                    <div class="v-top">
-                        <div class="v-meta">
-                            <h4>Volvo FH16 <span class="plate">DXB 102</span></h4>
-                            <p>Driver: John Wick</p>
-                        </div>
-                        <span class="status-badge moving">Moving</span>
+            
+            <div class="vehicle-item" onclick="showDetails('Volvo FH16')">
+                <div class="v-main">
+                    <div class="v-icon"><i data-lucide="truck"></i></div>
+                    <div class="v-text">
+                        <h4>Volvo FH16 <span class="badge">DXB 102</span></h4>
+                        <p>Driver: John Wick</p>
                     </div>
-                    <div class="v-stats">
-                        <span><i data-lucide="fuel" size="14"></i> 65%</span>
-                        <span><i data-lucide="gauge" size="14"></i> 32 PSI</span>
-                        <span><i data-lucide="map-pin" size="14"></i> 2.4km away</span>
-                    </div>
+                    <div class="v-status moving"></div>
                 </div>
+                <div class="v-metrics">
+                    <div class="metric"><i data-lucide="fuel"></i> 68%</div>
+                    <div class="metric"><i data-lucide="gauge"></i> 32 PSI</div>
+                    <div class="metric"><i data-lucide="thermometer"></i> 88°C</div>
                 </div>
+            </div>
         </section>
 
-        <section id="page-trips" class="page">
-            <div class="trip-entry">
-                <div class="trip-time">10:30 AM <br> <small>Today</small></div>
-                <div class="trip-details">
-                    <div class="route">
-                        <div class="loc"><strong>Warehouse A</strong></div>
+        <section id="page-trips" class="app-page">
+            <div class="trip-log">
+                <div class="trip-header">
+                    <span class="date">Today, 24 May</span>
+                    <span class="total-km">142.5 km</span>
+                </div>
+                <div class="trip-card">
+                    <div class="route-visual">
+                        <div class="circle"></div>
                         <div class="line"></div>
-                        <div class="loc"><strong>Distribution Hub</strong></div>
+                        <div class="circle-fill"></div>
                     </div>
-                    <div class="trip-meta">145 km • 2h 15m • 45L Consumed</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="page-alerts" class="page">
-            <div class="alert-box critical">
-                <div class="alert-icon"><i data-lucide="alert-octagon"></i></div>
-                <div class="alert-text">
-                    <h4>High Speed Violation</h4>
-                    <p>Vehicle #201 exceeded 100km/h in Zone B</p>
-                    <small>12 mins ago</small>
-                </div>
-                <button class="action-btn">Action</button>
-            </div>
-        </section>
-
-        <section id="page-vehicle-detail" class="page">
-            <div class="telemetry-display">
-                <div class="map-preview">Live GPS View</div>
-                <div class="data-rows">
-                    <div class="row"><span>Odometer</span><strong>45,000 km</strong></div>
-                    <div class="row"><span>Last Service</span><strong>12 May 2025</strong></div>
-                    <div class="row"><span>Tyre Health</span><strong class="text-green">Good (92%)</strong></div>
-                    <div class="row"><span>Engine Hours</span><strong>1,200 hrs</strong></div>
-                </div>
-                <div class="action-grid">
-                    <button class="btn-sec"><i data-lucide="lock"></i> Immobilize</button>
-                    <button class="btn-sec"><i data-lucide="phone"></i> Call Driver</button>
+                    <div class="route-details">
+                        <div class="loc">
+                            <strong>Warehouse Alpha</strong>
+                            <p>08:00 AM</p>
+                        </div>
+                        <div class="loc">
+                            <strong>Retail Center Center</strong>
+                            <p>10:45 AM</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <nav class="bottom-nav">
-        <div class="nav-btn active" onclick="navigate('dashboard', 'Dashboard')"><i data-lucide="home"></i></div>
-        <div class="nav-btn" onclick="navigate('vehicles', 'Vehicles')"><i data-lucide="truck"></i></div>
-        <div class="nav-btn" onclick="navigate('trips', 'Trips')"><i data-lucide="navigation"></i></div>
-        <div class="nav-btn" onclick="navigate('alerts', 'Alerts')"><i data-lucide="zap"></i></div>
-        <div class="nav-btn" onclick="navigate('profile', 'Profile')"><i data-lucide="user"></i></div>
+    <nav class="mobile-nav">
+        <button class="nav-btn active" onclick="switchPage('dashboard', 'Dashboard', this)">
+            <i data-lucide="layout-grid"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-btn" onclick="switchPage('vehicles', 'Fleet', this)">
+            <i data-lucide="truck"></i>
+            <span>Fleet</span>
+        </button>
+        <button class="nav-btn center-btn">
+            <div class="plus-icon"><i data-lucide="plus"></i></div>
+        </button>
+        <button class="nav-btn" onclick="switchPage('trips', 'Trips', this)">
+            <i data-lucide="route"></i>
+            <span>Trips</span>
+        </button>
+        <button class="nav-btn" onclick="switchPage('alerts', 'Alerts', this)">
+            <i data-lucide="bell"></i>
+            <span>Alerts</span>
+        </button>
     </nav>
 </div>
 
